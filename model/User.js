@@ -1,14 +1,21 @@
 const mongoose = require('mongoose')
 
 const UserSchema =mongoose.Schema({
-    name:{
+    firstName:{
         type:String,
-        required:[true, 'name must be filled']
+        required:[true, 'name must be filled'],
+        trim:true
+    },
+    lastName:{
+        type:String,
+        required:[true, 'name must be filled'],
+        trim:true
     },
     email:{
         type:String,
         required:[true, 'email must be filled'],
-        unique: true
+        unique: true,
+        trim:true
     },
     password:{
         type:String,
@@ -17,8 +24,8 @@ const UserSchema =mongoose.Schema({
     },
     role: {
         type:String,
-        enum:'user' || "admin",
-        default:'user'
+        enum:'Teacher' || "Principal",
+        default:'Teacher'
     },
     image:{
         type:Object,
