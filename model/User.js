@@ -34,11 +34,11 @@ const UserSchema =mongoose.Schema({
 
 },
 {
-    timesstamps: true
+    timestamps: true
 }
 )
 
 
 const User = mongoose.model('users',UserSchema)
 
-module.exports = User
+module.exports = {User}

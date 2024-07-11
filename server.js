@@ -3,6 +3,7 @@ require('dotenv').config()
 const mongoose = require("mongoose")
 const App = express()
 const AuthRoute = require('./routes/authRoute')
+const StudentRoute = require('./routes/studentRoute')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
@@ -21,6 +22,7 @@ App.use(cors([process.env.FRONTEND_URL]))
 
 // middlewares
 App.use('/api/user',AuthRoute)
+App.use('/api/student',StudentRoute)
 
 const PORT = process.env.PORT
 

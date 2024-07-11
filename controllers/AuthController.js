@@ -14,7 +14,7 @@ const RegisterController = async (req, res) => {
 
   try {
     // validations
-    if (!firstName || !lastName || !role || !email || !password) {
+    if (!firstName || !lastName || !role || !email || !password ) {
       return res.status(400).json("all filled required ");
     }
     if (password.length < 8) {
