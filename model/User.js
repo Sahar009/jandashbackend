@@ -24,7 +24,7 @@ const UserSchema =mongoose.Schema({
     },
     role: {
         type:String,
-        enum:'Teacher' || "Principal",
+        // enum:'Teacher' || "Principal",
         default:'Teacher'
     },
     image:{
@@ -41,4 +41,4 @@ const UserSchema =mongoose.Schema({
 
 const User = mongoose.model('users',UserSchema)
 
-module.exports = {User}
+module.exports = User

@@ -2,7 +2,7 @@ const User = require("../model/User");
 
 const JWT = require("jsonwebtoken");
 const Bcrypt = require("bcryptjs");
-
+const sendMail = require('../utils/mails')
 // create a registration function
 
 const generateToken = (id) =>{
@@ -25,7 +25,7 @@ const RegisterController = async (req, res) => {
     const Salt = Bcrypt.genSaltSync(10)
     const HashedPassword = Bcrypt.hashSync(password,Salt)
 
-    const EmailExist = await User.findOne({ email });
+    const EmailExist = await User.findOne({ email:email });
     if (EmailExist) {
       return res.status(400).json("email already exist");
     }
@@ -33,27 +33,28 @@ const RegisterController = async (req, res) => {
    
 //    generate and send 4 digit token to email
    
-   
-   
-   
-   
-   
-  
+
    
     // create a user 
     const createdUser =await User.create({
         firstName:firstName,
         lastName:lastName,
         email :email,
-        password: password,
+        password:HashedPassword,
         role:role,
-        image:image
+        // image:image
     })
 // genarate token 
 const Token =generateToken(createdUser._id)
-
+const subject ='janDash registration'
+const email_to = email
+const email_name = createdUser.firstName
+const body_message =`<h1>Thank you for registering ${email_name}</h1>
+ <br>
+ <button style="color:'red'; border:none; background:black;">click here to go to Dashboard<button>
+`
     if(createdUser){
-        
+        sendMail({subject:subject,email_to:email_to,body_message:body_message})
         res.status(201).json({
     createdUser
         })
