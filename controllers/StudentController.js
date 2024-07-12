@@ -22,7 +22,12 @@ const createNewStudent = async (req, res) => {
 const updateStudentProfile = async (req, res) => {
     const { id } = req.params;
     const { firstName, lastName, age, email, gender, address, dateOfBirth, refNumber, image, Class } = req.body;
+    console.log(`Updating student with ID: ${id}`);
     try {
+       const user = await studentModel.findById(id)
+       if(!user){
+      return  res.status(404).json('user not found kindly register')
+       }
         const updatedStudent = await studentModel.findByIdAndUpdate(
             {_id:id},
             { firstName, lastName, age, email, gender, address, dateOfBirth, refNumber, image, Class },
@@ -36,7 +41,12 @@ const updateStudentProfile = async (req, res) => {
 
 const deleteStudentProfile = async (req, res) => {
     const { id } = req.params;
+    console.log(`Updating student with ID: ${id}`);
     try {
+        const user = await studentModel.findById(id)
+       if(!user){
+      return  res.status(404).json('user not found kindly register')
+       }
         await studentModel.findByIdAndDelete(id);
         res.status(200).json({ message: 'Student profile deleted successfully' });
     } catch (error) {

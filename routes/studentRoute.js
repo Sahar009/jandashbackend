@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/getAllStudent',getAllStudents)
 router.post('/createStudentProfile',createNewStudent)
-router.patch('/updateStudentProfile/:id',updateStudentProfile)
+router.patch('/updateStudent/:id',updateStudentProfile)
 router.delete('/deleteStudent/:id',deleteStudentProfile)
 
 module.exports = router
